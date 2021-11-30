@@ -1,7 +1,6 @@
-# Next.js starter template.
+# doubles-front
 
-- Next.js
-- TypeScript
-- ESLint
-- Prettier
-- Jest
+doubles-appのフロントエンド
+
+Hosting:
+  (Vercel)
