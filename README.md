@@ -1,6 +1,6 @@
 # doubles-front
 
-doubles-appのフロントエンド
+doubles-app のフロントエンド
 
 Hosting:
-  (Vercel)
+(Vercel)
