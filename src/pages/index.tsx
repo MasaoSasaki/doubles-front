@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { Layout } from "src/components/layout";
-import { useState, useEffect } from "react";
 
 const url = "https://api.github.com/repos/zeit/next.js";
 
@@ -10,9 +9,8 @@ const Home: NextPage = () => {
     fetch(url)
       .then((r) => {
         r.json();
-        console.log(r, "Success");
       })
-      .then((j) => console.log(j, "fail"));
+      .then((j) => {return alert(j)});
   };
 
   return (
