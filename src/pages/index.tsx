@@ -10,7 +10,9 @@ const Home: NextPage = () => {
       .then((r) => {
         r.json();
       })
-      .then((j) => {return alert(j)});
+      .then((j) => {
+        return alert(j);
+      });
   };
 
   return (
