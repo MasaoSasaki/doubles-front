@@ -1,33 +1,46 @@
-// import { Match } from "../types"
+import type { Match } from "../types";
 
 export const MatchList = (entry: number) => {
-  let matchList: number[][] = [];
-  let match: number[] = [];
+  let matchList: Match[] = [];
   const MATCHES: number = (entry * (entry - 1) * (entry - 2) * (entry - 3)) / 8;
 
   //  すべての試合の配列を作る
   while (matchList.length < MATCHES) {
-    // 一試合分の配列を作る
-    while (match.length < entry) {
-      let playerNumber = Math.floor(Math.random() * (entry + 1 - 1)) + 1;
+    const match: Match = {
+      pairA: [],
+      pairB: [],
+      rest: [],
+    };
+    // pairAの配列を作る
+    while (match.pairA.length < 2) {
+      const playerNumber = Math.floor(Math.random() * (entry + 1 - 1)) + 1;
 
       // 重複を排除
-      if (match.includes(playerNumber)) continue;
+      if (match.pairA.includes(playerNumber)) continue;
 
-      // 一試合の選手の順番の確定
-      match = [...match, playerNumber];
-
-      // 初期化
-      playerNumber = 0;
+      // pairBの確定
+      match.pairA = [...match.pairA, playerNumber];
     }
+
+    // pairBの配列を作る
+    while (match.pairB.length < 2) {
+      const playerNumber = Math.floor(Math.random() * (entry + 1 - 1)) + 1;
+
+      // 重複を排除
+      if (match.pairA.includes(playerNumber)) continue;
+      if (match.pairB.includes(playerNumber)) continue;
+
+      // pairBの確定
+      match.pairB = [...match.pairB, playerNumber];
+    }
+
+    // 過去の配列を比較し重複排除
+    if (match.pairA === match.pairB) continue;
 
     // 一試合の確定
     matchList = [...matchList, match];
-
-    // 初期化
-    match = [];
   }
-
+  console.log(matchList);
   return matchList;
 };
 
