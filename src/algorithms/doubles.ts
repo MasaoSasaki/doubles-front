@@ -39,14 +39,12 @@ export const MatchList = (entry: number) => {
     console.log("判定開始");
     if (
       matchList.some((item) => {
-        item.pairA.toString() === match.pairA.toString();
+        item.pairA.toString() !== match.pairA.toString();
       })
     ) {
-      console.log("equal");
+      // 一試合の確定
+      matchList = [...matchList, match];
     }
-
-    // 一試合の確定
-    matchList = [...matchList, match];
   }
   console.log(matchList);
   return matchList;
