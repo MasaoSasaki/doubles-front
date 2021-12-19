@@ -11,6 +11,7 @@ export const MatchList = (entry: number) => {
       pairB: [],
       rest: [],
     };
+
     // pairAの配列を作る
     while (match.pairA.length < 2) {
       const playerNumber = Math.floor(Math.random() * (entry + 1 - 1)) + 1;
@@ -18,7 +19,7 @@ export const MatchList = (entry: number) => {
       // 重複を排除
       if (match.pairA.includes(playerNumber)) continue;
 
-      // pairBの確定
+      // pairAの確定
       match.pairA = [...match.pairA, playerNumber];
     }
 
@@ -35,7 +36,14 @@ export const MatchList = (entry: number) => {
     }
 
     // 過去の配列を比較し重複排除
-    if (match.pairA === match.pairB) continue;
+    console.log("判定開始");
+    if (
+      matchList.some((item) => {
+        item.pairA.toString() === match.pairA.toString();
+      })
+    ) {
+      console.log("equal");
+    }
 
     // 一試合の確定
     matchList = [...matchList, match];
@@ -44,4 +52,6 @@ export const MatchList = (entry: number) => {
   return matchList;
 };
 
-MatchList(4);
+for (let i = 0; i < 4; i++) {
+  MatchList(4);
+}
