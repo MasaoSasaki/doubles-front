@@ -5,7 +5,7 @@ export const MatchList = (entry: number) => {
   const MATCHES: number = (entry * (entry - 1) * (entry - 2) * (entry - 3)) / 8;
 
   //  すべての試合の配列を作る
-  while (matchList.length < MATCHES) {
+  CreateLoop: while (matchList.length < MATCHES) {
     const match: Match = {
       pairA: [],
       pairB: [],
@@ -36,17 +36,19 @@ export const MatchList = (entry: number) => {
     }
 
     // 過去の配列を比較し重複排除
-    console.log("判定開始");
-    if (
-      matchList.some((item) => {
-        item.pairA.toString() !== match.pairA.toString();
-      })
-    ) {
-      // 一試合の確定
-      matchList = [...matchList, match];
+    for (let i = 0; i < matchList.length; i++) {
+      if (
+        matchList[i].pairA.toString() === match.pairA.toString() ||
+        matchList[i].pairA.toString() === match.pairA.reverse().toString()
+      ) {
+        continue CreateLoop;
+      }
     }
+
+    // 一試合の確定
+    matchList = [...matchList, match];
   }
-  console.log(matchList);
+  // console.log(matchList);
   return matchList;
 };
 
