@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 import type { Match } from "../types";
 
 export const MatchList = (entry: number) => {
@@ -35,7 +37,7 @@ export const MatchList = (entry: number) => {
       match.pairB = [...match.pairB, playerNumber];
     }
 
-    // 過去の配列を比較し重複排除
+    // 過去の配列を比較し重複があった場合はmatchを作り直す。
     for (let i = 0; i < matchList.length; i++) {
       if (
         matchList[i].pairA.toString() === match.pairA.toString() ||
@@ -48,7 +50,7 @@ export const MatchList = (entry: number) => {
     // 一試合の確定
     matchList = [...matchList, match];
   }
-  // console.log(matchList);
+  console.log(matchList);
   return matchList;
 };
 
