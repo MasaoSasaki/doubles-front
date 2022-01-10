@@ -14,34 +14,19 @@ export const MatchList = (entry: number) => {
       rest: [],
     };
 
-    // pairAの配列を作る
-    while (match.pairA.length < 2) {
-      const playerNumber = Math.floor(Math.random() * (entry + 1 - 1)) + 1;
-
-      // 重複を排除
-      if (match.pairA.includes(playerNumber)) continue;
-
-      // pairAの確定
-      match.pairA = [...match.pairA, playerNumber];
-    }
-
-    // pairBの配列を作る
-    while (match.pairB.length < 2) {
-      const playerNumber = Math.floor(Math.random() * (entry + 1 - 1)) + 1;
-
-      // 重複を排除
-      if (match.pairA.includes(playerNumber)) continue;
-      if (match.pairB.includes(playerNumber)) continue;
-
-      // pairBの確定
-      match.pairB = [...match.pairB, playerNumber];
-    }
+    // エントリー人数分の配列をランダムで作成する。
+    const rangeArray = _.shuffle(_.range(1, entry + 1));
+    match.pairA = rangeArray.slice(0, 2);
+    match.pairB = rangeArray.slice(2, 4);
+    console.log(match);
 
     // 過去の配列を比較し重複があった場合はmatchを作り直す。
     for (let i = 0; i < matchList.length; i++) {
       if (
         matchList[i].pairA.toString() === match.pairA.toString() ||
-        matchList[i].pairA.toString() === match.pairA.reverse().toString()
+        matchList[i].pairA.toString() === match.pairA.reverse().toString() ||
+        matchList[i].pairA.toString() === match.pairB.toString() ||
+        matchList[i].pairA.toString() === match.pairB.reverse().toString()
       ) {
         continue CreateLoop;
       }
